@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Apa itu Array?</title>
+</head>
+<body>
+    
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col box">
+                <h1>Waktu</h1>
+                <h3>0 To Do</h3>
+            </div>
+        </div>
+    </div> -->
+
+    <ul id="list">
+        <!-- <li><input type="checkbox">Makan <button>Delete</button></li>
+        <li><input type="checkbox">Pergi <button>Delete</button></li>
+        <li><input type="checkbox">Mandi <button>Delete</button></li> -->
+    </ul>
+    <div class="container">
+    <!-- <form class="input-grup"> -->
+        <div class="row">
+            <div class="col">
+                <input id="input-todo" type="text" class="form-control-custom" placeholder="Masukan Catatan" required>
+            </div>
+            <div class="col">
+                <button id="add-button" class="float" type="submit">+</button>
+            </div>
+        </div>
+       
+        
+
+    <!-- </form> -->
+    </div>
+    <script href="scripts/script.js"></script>
+    <script>
+        const todos = [];
+        const listDOM = document.getElementById('list');
+        const inputDOM = document.getElementById('input-todo');
+        const addDOM = document.getElementById('add-button');
+
+        const data = JSON.parse(localStorage.getItem('todos'));
+        console.log("DATA: " + data);
+        
+        function render() {
+            let index = 0;
+            listDOM.innerHTML = "";
+            while(index < todos.length) {
+                console.log(index)
+                listDOM.innerHTML += '<li><input type="checkbox">' + todos[index] + ' <button onclick="hapus('+index+')">Delete</button></li>'
+                index = index + 1;
+            }
+        }
+     
+        render();
+
+        addDOM.addEventListener('click', function() {
+            const todo = inputDOM.value;
+            todos.push(todo);
+            console.log(todos);
+            render();
+            localStorage.setItem('todos', JSON.stringify(todos));
+        })
+
+        function hapus(p) {
+            console.log(p)
+            todos.splice(p,1)
+            render();
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+    </script>
+</body>
+</html>
